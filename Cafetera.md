@@ -1,7 +1,7 @@
 ```mermaid
 flowchart TD
     %% BLOQUE 1: INICIO E INICIALIZACIÓN
-    A([Inicio]) --> B[Inicializar Inventario hardware\ny Menú de Bebidas menu]
+    A([Inicio]) --> B[Inicializar Inventario hardware y Menú de Bebidas menu]
     B --> C[Definir opcion = -1]
 
     %% BLOQUE 2: MENÚ Y SELECCIÓN
@@ -12,33 +12,33 @@ flowchart TD
     
     G --> H{¿opcion == 0?}
     H -- Sí --> E
-    H -- No --> I{¿opcion < 1 o opcion > 6?}
+    H -- No --> I{"¿opcion < 1 o opcion > 6?"}
     I -- Sí (Inválida) --> J[/Mostrar error/] --> D
-    I -- No (Válida) --> K[Obtener Bebida elegida = menu[opcion - 1]]
+    I -- No (Válida) --> K["Obtener Bebida elegida = menu[opcion - 1]"]
 
     %% BLOQUE 3: EXTRAS Y VALIDACIÓN DE INSUMOS
-    K --> L[/Pedir leche extra (0 a 15 ml)/]
+    K --> L[/Pedir leche extra 0 a 15 ml/]
     L --> M{¿Leche válida?}
     M -- No --> L
-    M -- Sí --> N[/Pedir azúcar extra (0 a 10 g)/]
+    M -- Sí --> N[/Pedir azúcar extra 0 a 10 g/]
     N --> O{¿Azúcar válida?}
     O -- No --> N
     O -- Sí --> P[Calcular lecheTotal = base + extra]
 
-    P --> Q{¿hardware tiene\ninsumos suficientes?}
+    P --> Q{"¿hardware tiene insumos suficientes?"}
     Q -- No --> R[/Mostrar 'Insumos insuficientes'/] --> D
     
     %% BLOQUE 4: COBRO, CAMBIO Y ENTREGA
     Q -- Sí --> S[/Leer monedas ingresadas: m5U, m2U, m1U/]
     S --> T[Calcular montoTotal]
-    T --> U{¿montoTotal >= precio?}
+    T --> U{"¿montoTotal >= precio?"}
     U -- No --> V[/Mostrar 'Monto insuficiente'/] --> D
 
     U -- Sí --> W[Calcular cambio = montoTotal - precio]
     W --> X[Sumar monedas del usuario a la caja]
-    X --> Y[Calcular cambio exacto con algoritmo Greedy:\nusar monedas de $5, $2 y $1]
+    X --> Y["Calcular cambio exacto usando monedas de $5, $2 y $1"]
     
-    Y --> Z{¿Se entregó\ncambio exacto?}
+    Y --> Z{¿Se entregó cambio exacto?}
     Z -- No --> AA[Restar monedas del usuario de la caja] --> AB[/Mostrar 'Cambio insuficiente'/] --> D
     
     Z -- Sí --> AC[Descontar insumos de la máquina]
