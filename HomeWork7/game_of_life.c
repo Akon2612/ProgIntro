@@ -3,6 +3,8 @@
 #include <time.h>
 #include <unistd.h> // Para la función usleep()
 
+#define TAM 100
+
 int main(void) {
   int a[100][100];
   int b[100][100];
@@ -10,21 +12,21 @@ int main(void) {
 
   srand(time(NULL));
 
-  for (i = 0; i < 100; i++) {
-    for (j = 0; j < 100; j++) {
-      if ((double)rand() / RAND_MAX < 0.20) {
-        a[i][j] = 1; // 20% de probabilidad de vida
-      } else {
-        a[i][j] = 0;
-      }
+  for (i = 0; i < TAM; i++) {
+    for (j = 0; j < TAM; j++) {
+      a[i][j] = 0;
     }
   }
+
+  a[50][49] = 1;
+  a[50][50] = 1;
+  a[50][51] = 1;
 
   while (1) {
     printf("\033[H\033[J");
 
-    for (i = 0; i < 100; i++) {
-      for (j = 0; j < 100; j++) {
+    for (i = 0; i < TAM; i++) {
+      for (j = 0; j < TAM; j++) {
         if (a[i][j] == 1) {
           printf("#");
         } else {
@@ -34,11 +36,15 @@ int main(void) {
       printf("\n");
     }
 
-    for (i = 1; i < 99; i++) {
-      for (j = 1; j < 99; j++) {
-        int vecinos = a[i - 1][j - 1] + a[i - 1][j] + a[i - 1][j + 1] +
-                      a[i][j - 1] + a[i][j + 1] + a[i + 1][j - 1] +
-                      a[i + 1][j] + a[i + 1][j + 1];
+    for (i = 0; i < TAM; i++) {
+      for (j = 0; j < TAM; j++) {
+        int up = (i - 1 + TAM) % TAM;
+        int down = (i + 1) % TAM;
+        int left = (j - 1 + TAM) % TAM;
+        int right = (j + 1) % TAM;
+
+        int vecinos = a[up][left] + a[up][j] + a[up][right] + a[i][left] +
+                      a[i][right] + a[down][left] + a[down][j] + a[down][right];
 
         if (a[i][j] == 1) {
           if (vecinos < 2 || vecinos > 3) {
@@ -56,8 +62,8 @@ int main(void) {
       }
     }
 
-    for (i = 1; i < 99; i++) {
-      for (j = 1; j < 99; j++) {
+    for (i = 0; i < TAM; i++) {
+      for (j = 0; j < TAM; j++) {
         a[i][j] = b[i][j];
       }
     }
