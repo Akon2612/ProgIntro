@@ -13,6 +13,14 @@ int main(void) {
   int patron;
   int probabilidad;
 
+  printf("╔════════════════════════════╗\n");
+  printf("║                            ║\n");
+  printf("║          CONWAY'S          ║\n");
+  printf("║        GAME OF LIFE        ║\n");
+  printf("║                            ║\n");
+  printf("╚════════════════════════════╝\n");
+  printf("\n");
+
   printf("¿Qué deseas imprimir?\n");
   printf("1. Cuadrícula aleatoria\n");
   printf("2. Patrón específico\n");
