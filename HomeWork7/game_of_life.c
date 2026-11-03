@@ -3,27 +3,21 @@
 #include <time.h>
 #include <unistd.h> // Para la función usleep()
 
-#define TAM 100
+#define TAM 50
 
 int main(void) {
-  int a[100][100];
-  int b[100][100];
+  int a[TAM][TAM] = {0};
+  int b[TAM][TAM] = {0};
   int i, j;
 
-  srand(time(NULL));
-
-  for (i = 0; i < TAM; i++) {
-    for (j = 0; j < TAM; j++) {
-      a[i][j] = 0;
-    }
-  }
-
-  a[50][49] = 1;
-  a[50][50] = 1;
-  a[50][51] = 1;
+  a[1][2] = 1;
+  a[2][3] = 1;
+  a[3][1] = 1;
+  a[3][2] = 1;
+  a[3][3] = 1;
 
   while (1) {
-    printf("\033[H\033[J");
+    // printf("\033[H\033[J");
 
     for (i = 0; i < TAM; i++) {
       for (j = 0; j < TAM; j++) {
